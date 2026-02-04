@@ -44,7 +44,7 @@ dependencies:
   
   # Audio
   just_audio: ^0.9.46
-  audio_video_progress_bar: ^2.1.0
+  audio_video_progress_bar: ^2.0.3
   
   # UI
   google_fonts: ^6.2.1
