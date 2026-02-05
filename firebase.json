@@ -1,4 +1,7 @@
 {
+    "functions": {
+        "source": "functions"
+    },
     "hosting": {
         "public": "app/build/web",
         "ignore": [
