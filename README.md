@@ -19,6 +19,19 @@
 - 🔐 **Google Authentication**: Secure sign-in with Firebase Auth
 - 📚 **Music Library**: Save and manage your generated tracks
 
+## ✨ Features
+
+### 🎵 Core Capabilities
+- **Text-to-Music**: Generate high-fidelity music from simple text descriptions (e.g., "Upbeat jazz with saxophone").
+- **Lyrics-to-Music**: Provide your own lyrics and let AI compose the melody and backing track.
+- **Cover Style**: Upload a reference audio track to generate new music in that specific style.
+- **Audio Repainting**: Edit and regenerate specific sections of an audio track to perfect your composition.
+
+### 📱 User Experience
+- **Mobile Responsive**: Fully adaptive UI that works seamlessly on desktop, tablet, and mobile devices.
+- **Integrated Player**: Play, pause, and seek through your generated tracks directly in the browser.
+- **Google Authentication**: Secure sign-in to save your generation history and preferences.
+
 ## 🏗️ Architecture
 
 ```
@@ -136,6 +149,35 @@ Content-Type: application/json
 ```
 
 See [ACE-Step API Documentation](https://github.com/ace-step/ACE-Step-1.5/blob/main/docs/en/API.md) for complete reference.
+
+## 💰 Cost Optimization (Future Plans)
+
+ACE-Step only requires ~4GB VRAM, enabling several cost-saving opportunities:
+
+### Current VM Cost (asia-south1-b)
+
+| Component | Rate/hour | Daily (24h) |
+|-----------|-----------|-------------|
+| g2-standard-4 (4 vCPU, 16GB) | ~$0.25 | ~$6.00 |
+| NVIDIA L4 GPU (24GB) | ~$0.45 | ~$10.80 |
+| 50GB SSD | ~$0.004 | ~$0.10 |
+| **Total** | **~$0.70** | **~$16.90/day** |
+
+> 💡 **Stop VM when idle**: `gcloud compute instances stop jam-ai-gpu --zone=asia-south1-b`
+
+### Cost Reduction Options
+
+| Option | GPU | VRAM | Cost/hr | Notes |
+|--------|-----|------|---------|-------|
+| **Current (L4)** | NVIDIA L4 | 24GB | ~$0.70 | Works as testbed for other models |
+| **Recommended (T4)** | NVIDIA T4 | 16GB | ~$0.35 | Best for ACE-Step when available |
+| **Budget Option** | Preemptible T4 | 16GB | ~$0.11 | 80% cheaper, can be preempted |
+
+**Planned optimizations:**
+- ⏱️ **Auto-shutdown**: Scale down when idle to minimize costs
+- 🔄 **Preemptible VMs**: Use spot instances for non-critical workloads  
+- 📦 **Model quantization**: Reduce VRAM further with INT8 inference
+- ☁️ **Cloud Run GPU**: Serverless GPU when available in more regions
 
 ## 📜 License
 
